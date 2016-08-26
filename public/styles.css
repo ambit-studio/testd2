@@ -1,0 +1,16 @@
+.panel-heading {
+	text-align: center;
+}
+h1 {
+	color: darkgray;
+}
+h2 {
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+.centered {
+	text-align: center;
+}
+.inline {
+	display: inline-block;
+}
