@@ -31,7 +31,7 @@ class HomeController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->role == 'admin') {
+        if ($user->role->role == 'admin') {
             $users = User::all();
         }
         else {
@@ -48,18 +48,18 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function changeAdminAccess($user_id, Request $request) {
-        $user = User::find($user_id)->get()->first();
-
+    public function changeAdminAccess($user_id, Request $request) 
+    {
+        $user = User::find($user_id);
         if ($request->input('is_admin')) {
-            $user->role = 'admin';
+            $user->role_id = 1;
             $user->save();
         }
         else {
-            $user->role = null;
+            $user->role_id = 2;
             $user->save();
         }
 
-        return redirect('home');
+        return redirect('home')->with(['message' => 'Права пользователя успешно обновлены']);
     }
 }

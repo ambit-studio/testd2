@@ -13,6 +13,16 @@
                     <h2>Редактировать статью</h2>
                     <hr/>
 
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('home/article/'.$article->id) }}">
                         <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="PUT">
@@ -37,7 +47,7 @@
                         </div>
                     </form>
 
-                    <hr style="margin-top: 40px;"/>
+                    <hr/>
 
                 </div>
             </div>

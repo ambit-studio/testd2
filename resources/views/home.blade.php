@@ -10,13 +10,14 @@
                 </div>
 
                 <div class="panel-body">
+
                     @if ($users)
                         <h2>Пользователи</h2>
                         <hr/>
 
                         <div class="row">
-                            <h4 class="col-sm-3" style="text-align: right; border-right: 1px black solid;">Имя</h4>
-                            <h4 class="col-sm-9">Права администратора</h4>
+                            <h4 class="col-sm-2 name">Имя</h4>
+                            <h4 class="col-sm-4 centered">Права администратора</h4>
                         </div>
                         <hr/>
 
@@ -25,9 +26,9 @@
                             <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">{{ $user->name }}</label>
-                                <div class="col-sm-3 centered">
-                                    <input name="is_admin" type="checkbox" @if ($user->role == 'admin') checked @endif></input>
+                                <label class="col-sm-2 control-label">{{ $user->name }}</label>
+                                <div class="col-sm-4 centered">
+                                    <input name="is_admin" type="checkbox" @if ($user->role->role == 'admin') checked @endif></input>
                                 </div>
                                 <div class="col-sm-6">
                                     <button type="submit" class="btn btn-primary">Сохранить</button>
@@ -46,12 +47,13 @@
                     @foreach ($articles as $article)
                         <div class="row">
                             <div class="col-md-6">
-                                <a href="home/article/{{ $article->id }}">
+                                <a href="{{ url('home/article/'.$article->id) }}">
                                     {{ $article->title }}
                                 </a>
+                                <small class="author">(<small>автор:</small> <b>{{ $article->user->name }}</b>)</small>
                             </div>
                             <div class="col-md-6">
-                                <a href="home/article/{{ $article->id }}/edit">
+                                <a href="{{ url('home/article/'.$article->id.'/edit') }}">
                                     <button class="btn btn-primary"><i class="fa fa-pencil"></i></button>
                                     <form role="form" method="POST" action="home/article/{{ $article->id }}" class="inline">
                                         <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
@@ -65,6 +67,18 @@
                         <hr/>
 
                     @endforeach
+
+
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
 
                     <form class="form-horizontal" role="form" method="POST" action="home/article">
                         <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">

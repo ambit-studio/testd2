@@ -42,12 +42,18 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        Article::create([
-            'title' => $request->input('title'),
-            'text' => $request->input('text')
+        $this->validate($request, [
+            'title' => 'required|unique:articles|min:8|max:40',
+            'text' => 'required|min:10|max:255',
         ]);
 
-        return redirect('home');
+        Article::create([
+            'title' => $request->input('title'),
+            'text' => $request->input('text'),
+            'user_id' => $request->user()->id
+        ]);
+
+        return redirect('home')->with(['message' => 'Новая статья успешно добавлена']);
     }
 
     /**
@@ -58,7 +64,9 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        
+        $article = Article::find($id);
+
+        return view('article', compact('article'));
     }
 
     /**
@@ -83,12 +91,17 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'title' => 'required|unique:articles|min:8|max:40',
+            'text' => 'required|min:10|max:255',
+        ]);
+
         $article = Article::find($id)->update([
             'title' => $request->input('title'),
             'text' => $request->input('text')
         ]);
 
-        return redirect('home');
+        return redirect('home')->with(['message' => 'Статья успешно обновлена']);
     }
 
     /**
@@ -101,6 +114,6 @@ class ArticleController extends Controller
     {
         Article::find($id)->delete();
 
-        return redirect('home');
+        return redirect('home')->with(['message' => 'Статья успешно удалена']);
     }
 }

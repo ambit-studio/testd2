@@ -1,6 +1,18 @@
 .panel-heading {
 	text-align: center;
 }
+.mainpage {
+	padding-top: 100px;
+}
+.mainpage h3 {
+	text-align: center;
+}
+.mainpage a {
+	margin-top: 30px;
+}
+.panel {
+	border-width: 0;
+}
 h1 {
 	color: darkgray;
 }
@@ -13,4 +25,19 @@ h2 {
 }
 .inline {
 	display: inline-block;
+}
+.name {
+	text-align: right; 
+	border-right: 1px black solid;
+}
+.author {
+	margin-left: 30px;
+}
+.message_box {
+	display: none;
+}
+.modal-body {
+	text-align: center;
+	font-size: large;
+	color: green;
 }

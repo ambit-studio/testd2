@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Тестовое задание</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
@@ -76,9 +76,48 @@
 
     @yield('content')
 
+
+    <!-- MODAL WINDOW -->
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+                <i class="fa fa-times"></i>
+            </span></button>
+            <h5 class="modal-title"></h5>
+          </div>
+          <div class="modal-body">
+            <p id="message"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="message_box">@if (session('message')) {!! session('message') !!} @endif </div>
+
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+
+    <script type="text/javascript">
+
+        $(window).load( function() {
+             
+            showModal()
+
+            function showModal() {
+                message = $('.message_box').html();
+                if (message.length > 3) {
+                    $('#message').html(message);
+                    $('#myModal').modal();
+                }
+                    
+            }
+        });
+
+    </script>
 </body>
 </html>

@@ -6,12 +6,11 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h1>Тестовое задание</h1>
+                    <h1>{{ $article->title }}</h1>
                 </div>
 
-                <div class="panel-body mainpage">
-                    <h3>Добро пожаловать </h3>  
-                    <a href="{{ url('/home') }}">Начать работу <i class="fa fa-arrow-right"></i></a>
+                <div class="panel-body">
+                    {{ $article->text }}
                 </div>
             </div>
         </div>
